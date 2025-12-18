@@ -8,7 +8,7 @@ public class ConflictFlag {
     private Long caseId;
     private String flagType;
     private String description;
-    private String severnity;
+    private String severity;
     private LocalDateTime flaggedAt;
     public Long getId() {
         return id;
@@ -34,11 +34,11 @@ public class ConflictFlag {
     public void setDescription(String description) {
         this.description = description;
     }
-    public String getSevernity() {
-        return severnity;
+    public String getSeverity() {
+        return severity;
     }
-    public void setSevernity(String severnity) {
-        this.severnity = severnity;
+    public void setSeverity(String severity) {
+        this.severity = severity;
     }
     public LocalDateTime getFlaggedAt() {
         return flaggedAt;
@@ -46,13 +46,13 @@ public class ConflictFlag {
     public void setFlaggedAt(LocalDateTime flaggedAt) {
         this.flaggedAt = flaggedAt;
     }
-    public ConflictFlag(Long id, Long caseId, String flagType, String description, String severnity,
+    public ConflictFlag(Long id, Long caseId, String flagType, String description, String severity,
             LocalDateTime flaggedAt) {
         this.id = id;
         this.caseId = caseId;
         this.flagType = flagType;
         this.description = description;
-        this.severnity = severnity;
+        this.severity = severity;
         this.flaggedAt = flaggedAt;
     }
     public ConflictFlag() {
