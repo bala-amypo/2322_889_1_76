@@ -4,12 +4,12 @@ public class PersonProfile{
     @Id
     private long id;
     private String personType;
-    @Column(name=unique)
+    @Column(unique=true)
     private String referenceld;
     private String fullName;
-    @Column(name=unique)
+    @Column(unique=true)
     private String email;
-    private bool relationshipDeclared;
+    private boolean relationshipDeclared;
     private LocalDateTime createdAt;
     public long getId() {
         return id;
