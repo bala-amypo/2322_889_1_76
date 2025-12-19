@@ -1,5 +1,5 @@
-package com.example.demo.model
-import jakarta.presistence.*
+package com.example.demo.model;
+import jakarta.presistence.*;
 public class PersonProfile{
     @Id
     private long id;
