@@ -1,7 +1,7 @@
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
-
+import com.example.demo.model.*;
 @RestController
 @RequestMapping("/api/persons")
 @Tag(name = "Person Profile")
