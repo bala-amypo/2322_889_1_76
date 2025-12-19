@@ -1,5 +1,6 @@
 package com.example.demo.model;
-import jakarta.presistence.*;
+import jakarta.persistence.*;
+import java.tim
 public class PersonProfile{
     @Id
     private long id;
@@ -56,7 +57,7 @@ public class PersonProfile{
     public PersonProfile() {
     }
     public PersonProfile(long id, String personType, String referenceld, String fullName, String email,
-            bool relationshipDeclared, LocalDateTime createdAt) {
+            boolean relationshipDeclared, LocalDateTime createdAt) {
         this.id = id;
         this.personType = personType;
         this.referenceld = referenceld;

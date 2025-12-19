@@ -1,5 +1,5 @@
 package com.example.demo.model;
-import jakarta.presistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 public class ConflictFlag {
