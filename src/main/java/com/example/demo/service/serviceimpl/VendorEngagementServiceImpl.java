@@ -2,11 +2,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class VendorEngagementServiceImpl
-        implements VendorEngagementService {
+public class VendorEngagementServiceImpl implements VendorEngagementService {
 
+    
     private final VendorEngagementRepository repository;
-
     public VendorEngagementServiceImpl(VendorEngagementRepository repository) {
         this.repository = repository;
     }
