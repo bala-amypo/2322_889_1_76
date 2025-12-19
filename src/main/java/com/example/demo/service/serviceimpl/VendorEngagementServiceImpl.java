@@ -5,8 +5,8 @@ import java.util.List;
 public class VendorEngagementServiceImpl implements VendorEngagementService {
 
     
-    private final VendorEngagementRepository repository;
-    public VendorEngagementServiceImpl(VendorEngagementRepository repository) {
+    private final VendorEngagementRecordRepository repository;
+    public VendorEngagementServiceImpl(VendorEngagementRecordRepository repository) {
         this.repository = repository;
     }
 
