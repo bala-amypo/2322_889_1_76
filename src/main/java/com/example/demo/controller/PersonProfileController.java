@@ -1,10 +1,13 @@
+package com.example.demo.controller;
+
+import com.example.demo.model.PersonProfile;
+import com.example.demo.service.PersonProfileService;
 import org.springframework.web.bind.annotation.*;
-import io.swagger.v3.oas.annotations.tags.Tag;
+
 import java.util.List;
-import com.example.demo.model.*;
+
 @RestController
 @RequestMapping("/api/persons")
-@Tag(name = "Person Profile")
 public class PersonProfileController {
 
     private final PersonProfileService service;
@@ -28,15 +31,15 @@ public class PersonProfileController {
         return service.getAllPersons();
     }
 
-    @PutMapping("/{id}/relationship-declared")
-    public PersonProfile updateRelationshipDeclared(
+    @GetMapping("/reference/{referenceId}")
+    public PersonProfile getByReference(@PathVariable String referenceId) {
+        return service.findByReferenceId(referenceId);
+    }
+
+    @PutMapping("/{id}/relationship")
+    public PersonProfile updateRelationship(
             @PathVariable Long id,
             @RequestParam boolean declared) {
         return service.updateRelationshipDeclared(id, declared);
-    }
-
-    @GetMapping("/lookup/{referenceId}")
-    public PersonProfile getByReferenceId(@PathVariable String referenceId) {
-        return service.findByReferenceId(referenceId);
     }
 }

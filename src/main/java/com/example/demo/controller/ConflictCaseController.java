@@ -1,10 +1,13 @@
+package com.example.demo.controller;
+
+import com.example.demo.model.ConflictCase;
+import com.example.demo.service.ConflictCaseService;
 import org.springframework.web.bind.annotation.*;
-import io.swagger.v3.oas.annotations.tags.Tag;
+
 import java.util.List;
-import com.example.demo.model.*;
+
 @RestController
 @RequestMapping("/api/conflict-cases")
-@Tag(name = "Conflict Case")
 public class ConflictCaseController {
 
     private final ConflictCaseService service;
@@ -26,7 +29,7 @@ public class ConflictCaseController {
     }
 
     @GetMapping("/person/{personId}")
-    public List<ConflictCase> getByPerson(
+    public List<ConflictCase> byPerson(
             @PathVariable Long personId) {
         return service.getCasesByPerson(personId);
     }
