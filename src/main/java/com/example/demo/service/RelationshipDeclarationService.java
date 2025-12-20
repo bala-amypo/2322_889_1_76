@@ -1,5 +1,8 @@
+package com.example.demo.service;
+
+import com.example.demo.model.RelationshipDeclaration;
 import java.util.List;
-import com.example.demo.model.*;
+
 public interface RelationshipDeclarationService {
     RelationshipDeclaration declareRelationship(RelationshipDeclaration declaration);
     List<RelationshipDeclaration> getDeclarationsByPerson(Long personId);

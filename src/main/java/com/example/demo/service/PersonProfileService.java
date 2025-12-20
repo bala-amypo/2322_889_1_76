@@ -1,5 +1,8 @@
+package com.example.demo.service;
+
+import com.example.demo.model.PersonProfile;
 import java.util.List;
-import com.example.demo.model.*;
+
 public interface PersonProfileService {
     PersonProfile createPerson(PersonProfile person);
     PersonProfile getPersonById(Long id);

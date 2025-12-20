@@ -1,7 +1,12 @@
 package com.example.demo.repository;
-import org.springframework.data.jpa.repository.JpaRepository;
-import com.example.demo.model.ConflictCase;
-public interface ConflictCaseRepository extends JpaRepository<ConflictCase,Long>{
 
-    
+import com.example.demo.model.ConflictCase;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface ConflictCaseRepository
+        extends JpaRepository<ConflictCase, Long> {
+
+    List<ConflictCase> findByPrimaryPersonIdOrSecondaryPersonId(Long p1, Long p2);
 }
