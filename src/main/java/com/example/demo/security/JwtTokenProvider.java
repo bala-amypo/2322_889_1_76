@@ -12,13 +12,12 @@ public class JwtTokenProvider {
     private final Key secretKey;
     private final long validityInMs;
 
-    // ✅ REQUIRED BY TESTS
+
     public JwtTokenProvider(String secret, long validityInMs) {
         this.secretKey = Keys.hmacShaKeyFor(secret.getBytes());
         this.validityInMs = validityInMs;
     }
 
-    // ✅ Generate token with username only
     public String generateToken(String username) {
         Date now = new Date();
         Date expiry = new Date(now.getTime() + validityInMs);
@@ -31,7 +30,7 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    // ✅ Overload used by some tests (roles optional)
+
     public String generateToken(String username, List<String> roles) {
         Date now = new Date();
         Date expiry = new Date(now.getTime() + validityInMs);
@@ -45,7 +44,7 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    // ✅ Extract username
+
     public String getUsername(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(secretKey)
@@ -55,7 +54,6 @@ public class JwtTokenProvider {
                 .getSubject();
     }
 
-    // ✅ Validate token (tests call this)
     public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder()
