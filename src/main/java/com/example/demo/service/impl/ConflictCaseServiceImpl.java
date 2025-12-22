@@ -58,11 +58,11 @@ import com.example.demo.model.ConflictCase;
 import com.example.demo.repository.ConflictCaseRepository;
 import com.example.demo.repository.ConflictFlagRepository;
 import com.example.demo.service.ConflictCaseService;
-import org.springframework.stereotype.Service;   // ⭐ ADD THIS
 
 import java.util.List;
+import org.springframework.stereotype.Service;   
 
-@Service   // ⭐ THIS IS THE KEY
+@Service  
 public class ConflictCaseServiceImpl implements ConflictCaseService {
 
     private final ConflictCaseRepository repo;

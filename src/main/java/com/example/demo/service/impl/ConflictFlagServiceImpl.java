@@ -5,9 +5,9 @@ import com.example.demo.model.ConflictFlag;
 import com.example.demo.repository.ConflictCaseRepository;
 import com.example.demo.repository.ConflictFlagRepository;
 import com.example.demo.service.ConflictFlagService;
-
 import java.util.List;
-
+import org.springframework.stereotype.Service;   
+@Service
 public class ConflictFlagServiceImpl implements ConflictFlagService {
 
     private final ConflictFlagRepository repo;
