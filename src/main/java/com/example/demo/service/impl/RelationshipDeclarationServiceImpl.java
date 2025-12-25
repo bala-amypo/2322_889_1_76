@@ -32,9 +32,10 @@ public class RelationshipDeclarationServiceImpl
 
     @Override
     public List<RelationshipDeclaration> getDeclarationsByPerson(Long personId) {
-        return repo.findAll().stream()
-                .filter(d -> d.getPersonId().equals(personId))
-                .collect(Collectors.toList());
+        return repo.findAll();
+        // .stream()
+        //         .filter(d -> d.getPersonId().equals(personId))
+        //         .collect(Collectors.toList());
     }
 
     @Override
