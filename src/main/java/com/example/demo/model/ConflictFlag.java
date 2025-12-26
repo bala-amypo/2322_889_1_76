@@ -3,33 +3,25 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "conflict_case")
-public class ConflictCase {
+@Table(name = "conflict_flag")
+public class ConflictFlag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private Long primaryPersonId;
-    private Long secondaryPersonId;
-    private String triggerSource;
-    private String riskLevel;
-    private String status = "OPEN";
+    private Long caseId;
+    private String flagType;
+    private String severity;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     
-    public Long getPrimaryPersonId() { return primaryPersonId; }
-    public void setPrimaryPersonId(Long primaryPersonId) { this.primaryPersonId = primaryPersonId; }
+    public Long getCaseId() { return caseId; }
+    public void setCaseId(Long caseId) { this.caseId = caseId; }
     
-    public Long getSecondaryPersonId() { return secondaryPersonId; }
-    public void setSecondaryPersonId(Long secondaryPersonId) { this.secondaryPersonId = secondaryPersonId; }
+    public String getFlagType() { return flagType; }
+    public void setFlagType(String flagType) { this.flagType = flagType; }
     
-    public String getTriggerSource() { return triggerSource; }
-    public void setTriggerSource(String triggerSource) { this.triggerSource = triggerSource; }
-    
-    public String getRiskLevel() { return riskLevel; }
-    public void setRiskLevel(String riskLevel) { this.riskLevel = riskLevel; }
-    
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public String getSeverity() { return severity; }
+    public void setSeverity(String severity) { this.severity = severity; }
 }
