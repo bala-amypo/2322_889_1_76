@@ -45,4 +45,9 @@ public class RelationshipDeclarationServiceImpl implements RelationshipDeclarati
     public List<RelationshipDeclaration> getAllDeclarations() {
         return relationshipRepo.findAll();
     }
+
+    @Override
+    public List<RelationshipDeclaration> getDeclarationsByPerson(Long personId) {
+        return relationshipRepo.findByPersonId(personId);
+    }
 }
