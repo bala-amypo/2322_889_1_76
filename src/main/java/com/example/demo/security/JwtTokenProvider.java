@@ -1,147 +1,52 @@
-// package com.example.demo.security;
-
-// import io.jsonwebtoken.*;
-// import io.jsonwebtoken.security.Keys;
-
-// import java.security.Key;
-// import java.util.Date;
-// import java.util.List;
-
-// public class JwtTokenProvider {
-
-//     private final Key secretKey;
-//     private final long validityInMs;
-
-
-//     public JwtTokenProvider(String secret, long validityInMs) {
-//         this.secretKey = Keys.hmacShaKeyFor(secret.getBytes());
-//         this.validityInMs = validityInMs;
-//     }
-
-//     public String generateToken(String username) {
-//         Date now = new Date();
-//         Date expiry = new Date(now.getTime() + validityInMs);
-
-//         return Jwts.builder()
-//                 .setSubject(username)
-//                 .setIssuedAt(now)
-//                 .setExpiration(expiry)
-//                 .signWith(secretKey, SignatureAlgorithm.HS256)
-//                 .compact();
-//     }
-
-
-//     public String generateToken(String username, List<String> roles) {
-//         Date now = new Date();
-//         Date expiry = new Date(now.getTime() + validityInMs);
-
-//         return Jwts.builder()
-//                 .setSubject(username)
-//                 .claim("roles", roles)
-//                 .setIssuedAt(now)
-//                 .setExpiration(expiry)
-//                 .signWith(secretKey, SignatureAlgorithm.HS256)
-//                 .compact();
-//     }
-
-
-//     public String getUsername(String token) {
-//         return Jwts.parserBuilder()
-//                 .setSigningKey(secretKey)
-//                 .build()
-//                 .parseClaimsJws(token)
-//                 .getBody()
-//                 .getSubject();
-//     }
-
-//     public boolean validateToken(String token) {
-//         try {
-//             Jwts.parserBuilder()
-//                 .setSigningKey(secretKey)
-//                 .build()
-//                 .parseClaimsJws(token);
-//             return true;
-//         } catch (JwtException | IllegalArgumentException e) {
-//             return false;
-//         }
-//     }
-// }
-
-
-
-
-
 package com.example.demo.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.stereotype.Component;
 
-import java.security.Key;
+import javax.crypto.SecretKey;
 import java.util.Date;
-import java.util.List;
 
+@Component
 public class JwtTokenProvider {
+    private final SecretKey key;
+    private final long validityInMilliseconds;
 
-    private final Key secretKey;
-    private final long validityInMs;
-
-    // ✅ REQUIRED constructor (tests call this directly)
-    public JwtTokenProvider(String secret, long validityInMs) {
-
-        // ✅ Prevent WeakKeyException if secret is short
-        byte[] keyBytes = secret.getBytes();
-        if (keyBytes.length < 32) {
-            byte[] padded = new byte[32];
-            System.arraycopy(keyBytes, 0, padded, 0, keyBytes.length);
-            keyBytes = padded;
-        }
-
-        this.secretKey = Keys.hmacShaKeyFor(keyBytes);
-        this.validityInMs = validityInMs;
+    public JwtTokenProvider() {
+        this("THIS_IS_A_TEST_32_CHAR_MINIMUM_SECRET_KEY_!!!", 3600000L);
     }
 
-    // ✅ Generate token with username only
-    public String generateToken(String username) {
+    public JwtTokenProvider(String secret, long validityInMilliseconds) {
+        this.key = Keys.hmacShaKeyFor(secret.getBytes());
+        this.validityInMilliseconds = validityInMilliseconds;
+    }
+
+    public String generateToken(UserPrincipal userPrincipal) {
         Date now = new Date();
-        Date expiry = new Date(now.getTime() + validityInMs);
+        Date validity = new Date(now.getTime() + validityInMilliseconds);
 
         return Jwts.builder()
-                .setSubject(username)
+                .setSubject(userPrincipal.getUsername())
+                .claim("userId", userPrincipal.getId())
                 .setIssuedAt(now)
-                .setExpiration(expiry)
-                .signWith(secretKey, SignatureAlgorithm.HS256)
+                .setExpiration(validity)
+                .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    // ✅ Generate token with roles
-    public String generateToken(String username, List<String> roles) {
-        Date now = new Date();
-        Date expiry = new Date(now.getTime() + validityInMs);
-
-        return Jwts.builder()
-                .setSubject(username)
-                .claim("roles", roles)
-                .setIssuedAt(now)
-                .setExpiration(expiry)
-                .signWith(secretKey, SignatureAlgorithm.HS256)
-                .compact();
-    }
-
-    // ✅ Extract username from token
-    public String getUsername(String token) {
+    public String getUsernameFromToken(String token) {
         return Jwts.parserBuilder()
-                .setSigningKey(secretKey)
+                .setSigningKey(key)
                 .build()
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
     }
 
-    // ✅ Validate token (tests expect true for valid tokens)
     public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder()
-                    .setSigningKey(secretKey)
+                    .setSigningKey(key)
                     .build()
                     .parseClaimsJws(token);
             return true;
